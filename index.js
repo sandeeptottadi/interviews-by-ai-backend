@@ -10,9 +10,9 @@ const fs = require("fs");
 app.use(bodyParser.json());
 app.use(cors());
 
-// const OpenAI = require("openai");
+const OpenAI = require("openai");
 
-// const openai = new OpenAI({ apiKey: process.env.OPEN_AI_SECRET_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPEN_AI_SECRET_KEY });
 
 // app.post("/generate_questions", async (req, res) => {
 //   const jobDescription = req.body.jobDescription;
@@ -47,8 +47,6 @@ app.use(cors());
 //     res.send({ error: e });
 //   }
 // });
-
-// app.use(cors());
 
 // const storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
