@@ -6,7 +6,7 @@ require("dotenv").config();
 const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
-const { Interviews_db } = require("./mongo_config");
+// const { Interviews_db } = require("./mongo_config");
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -14,7 +14,7 @@ app.use(cors());
 const OpenAI = require("openai");
 
 const openai = new OpenAI({ apiKey: process.env.OPEN_AI_SECRET_KEY });
-const questions_col = Interviews_db.collection("Questions");
+// const questions_col = Interviews_db.collection("Questions");
 
 app.post("/generate_questions", async (req, res) => {
   const jobDescription = req.body.jobDescription;
