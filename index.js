@@ -11,7 +11,7 @@ const { Interviews_db } = require("./mongo_config");
 app.use(bodyParser.json());
 app.use(cors());
 
-const OpenAI = require("openai");
+// const OpenAI = require("openai");
 
 const questions_col = Interviews_db.collection("Questions");
 
@@ -85,7 +85,6 @@ async function generate_feedback(question, transcription) {
 
 app.post("/generate_response", upload.single("audio"), async (req, res) => {
   const openai = new OpenAI({ apiKey: process.env.OPEN_AI_SECRET_KEY });
-
   try {
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded" });
