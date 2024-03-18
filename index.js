@@ -101,4 +101,4 @@ app.post("/generate_response", upload.single("audio"), async (req, res) => {
   }
 });
 
-app.listen(8001);
+app.listen(8001 || process.env.PORT);
