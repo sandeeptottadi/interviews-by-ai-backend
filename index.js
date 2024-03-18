@@ -12,7 +12,7 @@ app.use(cors());
 
 const OpenAI = require("openai");
 
-// const openai = new OpenAI({ apiKey: process.env.OPEN_AI_SECRET_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPEN_AI_SECRET_KEY });
 
 app.post("/generate_questions", async (req, res) => {
   const jobDescription = req.body.jobDescription;
