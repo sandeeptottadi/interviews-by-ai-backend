@@ -11,12 +11,14 @@ const { Interviews_db } = require("./mongo_config");
 app.use(bodyParser.json());
 app.use(cors());
 
-// const OpenAI = require("openai");
+const OpenAI = require("openai");
+
+console.log(process.env.OPEN_AI_SECRET_KEY);
 
 const questions_col = Interviews_db.collection("Questions");
+const openai = new OpenAI({ apiKey: process.env.OPEN_AI_SECRET_KEY });
 
 app.post("/generate_questions", async (req, res) => {
-  const openai = new OpenAI({ apiKey: process.env.OPEN_AI_SECRET_KEY });
   const jobDescription = req.body.jobDescription;
   try {
     const prompt = `You are the interviewr for a position at a company. You are interviewing a candidate who applies for the following job description: ${jobDescription}. You are tasked with coming up with an questions to ask the candidate. The question should be open-ended and should help you understand the candidate's experience and skills. The questions should also help you understand the candidate's problem-solving abilities and how they would fit into the company's culture. The questions should be relevant to the job description and should help you understand the candidate's experience and skills. Note : return an array of those 10 questions.`;
@@ -64,7 +66,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 async function generate_feedback(question, transcription) {
-  const openai = new OpenAI({ apiKey: process.env.OPEN_AI_SECRET_KEY });
   try {
     const prompt = `You are the interviewr for a position at a company. You are interviewing a candidate whose response to the following question: ${question}. is as follows: ${transcription}. you are tasked with providing feedback on the candidate's response. The feedback should be constructive and should help the candidate understand how they can improve their response. The feedback should also help the candidate understand how they can improve their problem-solving abilities and how they would fit into the company's culture. The feedback should be relevant to the user response with the question and should help the candidate understand how they can improve their experience and skills.`;
     const completion = await openai.chat.completions.create({
@@ -84,7 +85,6 @@ async function generate_feedback(question, transcription) {
 }
 
 app.post("/generate_response", upload.single("audio"), async (req, res) => {
-  const openai = new OpenAI({ apiKey: process.env.OPEN_AI_SECRET_KEY });
   try {
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded" });
