@@ -20,8 +20,5 @@
     "nodemon": "^3.1.0",
     "openai": "^4.29.1",
     "uuid": "^9.0.1"
-  },
-  "devDependencies": {
-    "esbuild": "^0.20.2"
   }
 }
