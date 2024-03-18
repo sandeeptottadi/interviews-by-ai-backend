@@ -10,7 +10,7 @@ const fs = require("fs");
 app.use(bodyParser.json());
 app.use(cors());
 
-// const OpenAI = require("openai");
+const OpenAI = require("openai");
 
 // const openai = new OpenAI({ apiKey: process.env.OPEN_AI_SECRET_KEY });
 
